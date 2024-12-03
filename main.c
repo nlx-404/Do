@@ -139,12 +139,15 @@ void clear_tasks()
     num_tasks = 0;
     printf("All tasks cleared.\n");
     save_tasks();
-    /* Method 2: Go to the first character and set it to null terminator
-    for (int i = 0; i < MAX_TASKS; i++)
-    {
-        tasks[i][0] = '\0';
-    }
-    num_tasks = 0; */
+
+    // // Method 2: Go to the first character and set it to null terminator
+    // for (int i = 0; i < MAX_TASKS; i++)
+    // {
+    //     tasks[i][0] = '\0';
+    // }
+    // num_tasks = 0;
+    // printf("All tasks cleared.\n");
+    // save_tasks();
 }
 
 int main(int argc, char *argv[])
@@ -193,7 +196,7 @@ int main(int argc, char *argv[])
             remove_task(index);
         }
     }
-    else if (strcmp(argv[2], "clear") == 0)
+    else if (strcmp(argv[1], "clear") == 0)
     {
         clear_tasks();
     }
