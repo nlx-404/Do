@@ -85,6 +85,7 @@ void load_tasks()
 // Function to add tasks
 void add_task(char *task /* Expects a string */)
 {
+
     if (num_tasks < MAX_TASKS)
     {
         // If there is enough space for tasks, take the oncoming task argument and copy it into tasks[num_tasks] and with a limit of MAX_TASK_LENGTH
