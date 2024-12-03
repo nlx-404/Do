@@ -25,7 +25,7 @@ void save_tasks()
     FILE *file = fopen(FILENAME, "w");
     if (file == NULL)
     {
-        printf("Error opening file\n");
+        printf("Error opening file.\n");
         return;
 
         // Write the number of tasks to the file. This makes it easier for program to know how many tasks to load later when you restart it
@@ -56,7 +56,7 @@ void load_tasks()
     // Read the number of tasks from the file
     if (fscanf(file, "%d\n", &num_tasks) != 1)
     {
-        printf("No tasks found\n");
+        printf("No tasks found.\n");
         fclose(file);
         return;
     }
@@ -66,7 +66,7 @@ void load_tasks()
     {
         if (fgets(tasks[i], MAX_TASK_LENGTH, file) == NULL)
         {
-            printf("Error reading tasks\n");
+            printf("Error reading tasks.\n");
 
             // If there is an error this updates num_tasks to the number of tasks successfully read so far to prevent invalid data
             num_tasks = i;
@@ -90,7 +90,7 @@ void add_task(char *task /* Expects a string */)
         // If there is enough space for tasks, take the oncoming task argument and copy it into tasks[num_tasks] and with a limit of MAX_TASK_LENGTH
         strncpy(tasks[num_tasks], task, MAX_TASK_LENGTH);
         num_tasks++;
-        printf("Task added\n");
+        printf("Task added.\n");
         save_tasks();
     }
 }
@@ -114,9 +114,36 @@ void list_tasks()
 // Function to delete tasks
 void remove_task(int task_index)
 {
+    // If it is a valid task copy the contents of the task after it into its old place - basically shifting each element down
     if (task_index >= 0 && task_index < num_tasks)
     {
+        for (int i = task_index; i < num_tasks - 1; i++)
+        {
+            strncpy(tasks[i], tasks[i + 1], MAX_TASK_LENGTH);
+        }
+        num_tasks--;
+        printf("Task %d removed.\n", task_index);
+        save_tasks();
     }
+    else
+    {
+        printf("Invalid task selected.\n");
+    }
+}
+
+// Function to clear all tasks
+void clear_tasks()
+{
+    // Method 1: Resets task count to 0 and program thinks there is no tasks and when tasks are added they're overwritten in the file
+    num_tasks = 0;
+    printf("All tasks cleared.\n");
+    save_tasks();
+    /* Method 2: Go to the first character and set it to null terminator
+    for (int i = 0; i < MAX_TASKS; i++)
+    {
+        tasks[i][0] = '\0';
+    }
+    num_tasks = 0; */
 }
 
 int main()
