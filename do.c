@@ -146,8 +146,60 @@ void clear_tasks()
     num_tasks = 0; */
 }
 
-int main()
+int main(int argc, char *argv[])
 {
+    load_tasks();
+
+    // If argument is less than 2 - example user just says do, it will print out a guide
+    if (argc < 2)
+    {
+        printf("Usage: do <command> [arguments]\n");
+        printf("Commands:\n");
+        printf(" add <task>       Add a new task\n");
+        printf(" list             List all tasks");
+        printf(" remove <index>   Remove a task by its index\n");
+        printf(" clear            Clear all tasks\n");
+        // Return 1 indicates an error
+        return 1;
+    }
+
+    // If both strings are the same return 0 meaning success
+    if (strcmp(argv[1], "add") == 0)
+    {
+        if (argc < 3)
+        {
+            printf("Error: Please enter a task.\n");
+        }
+        else
+        {
+            add_task(argv[2]);
+        }
+    }
+    else if (strcmp(argv[1], "list") == 0)
+    {
+        list_tasks();
+    }
+    else if (strcmp(argv[1], "remove") == 0)
+    {
+        if (argc < 3)
+        {
+            printf("Error: Please enter an index.\n");
+        }
+        else
+        {
+            // Convert the task index string into an integer using atoi
+            int index = atoi(argv[2]);
+            remove_task(index);
+        }
+    }
+    else if (strcmp(argv[2], "clear") == 0)
+    {
+        clear_tasks();
+    }
+    else
+    {
+        printf("Unkown command: %s\n", argv[1]);
+    }
 
     return 0;
 }
