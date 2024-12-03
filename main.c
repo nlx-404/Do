@@ -27,10 +27,10 @@ void save_tasks()
     {
         printf("Error opening file.\n");
         return;
-
-        // Write the number of tasks to the file. This makes it easier for program to know how many tasks to load later when you restart it
-        fprintf(file, "%d\n", num_tasks);
     }
+
+    // Write the number of tasks to the file. This makes it easier for program to know how many tasks to load later when you restart it
+    fprintf(file, "%d\n", num_tasks);
 
     // Print each task on a new line
     for (int i = 0; i < num_tasks; i++)
@@ -40,7 +40,7 @@ void save_tasks()
 
     // Close the file to ensure all data is saved and no resource leaks
     fclose(file);
-    printf("Tasks succesfully saved");
+    // printf("Tasks succesfully saved");
 }
 
 // Function to load tasks from a file
@@ -79,7 +79,7 @@ void load_tasks()
 
     // Close the file
     fclose(file);
-    printf("%d tasks loaded", num_tasks);
+    // printf("%d tasks loaded\n", num_tasks);
 }
 
 // Function to add tasks
